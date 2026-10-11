@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PageScrapper - Internal Link & On-Page SEO Architecture</title>
+    <title>PageScrapper - Internal Link Architecture by Rohit Mehmi</title>
     
     <link rel="icon" type="image/png" href="assets/favicon.png">
 
@@ -46,7 +46,7 @@
         <div class="flex items-center gap-3">
             <img src="assets/logo.png" onerror="this.style.display='none'" alt="PageScrapper" class="h-10 w-auto object-contain">
             <span class="text-xs font-bold px-2.5 py-0.5 bg-orange-100 text-orange-700 rounded-full uppercase tracking-wider hidden sm:inline-block">
-                Internal Links & On-Page SEO
+                Internal Links & Architecture
             </span>
             <span class="text-xs font-semibold px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded-md border border-slate-200 hidden md:inline-block">
                 By Rohit Mehmi
@@ -56,7 +56,7 @@
         <div class="flex items-center gap-3">
             <div class="text-xs bg-orange-50 border border-orange-200 text-orange-700 px-3 py-1.5 rounded-lg font-semibold flex items-center gap-1.5">
                 <i class="fa-solid fa-diagram-project text-orange-500"></i>
-                <span>Deep Architecture Scanner</span>
+                <span>Inbound Internal Link Scanner</span>
             </div>
             <div id="ipBadge" class="text-xs bg-slate-100 border border-slate-200 text-slate-600 px-3 py-1.5 rounded-lg font-mono flex items-center gap-1.5">
                 <i class="fa-solid fa-wifi text-slate-400"></i>
@@ -77,12 +77,12 @@
                     <div class="flex flex-col sm:flex-row gap-3">
                         <div class="relative flex-1">
                             <i class="fa-solid fa-link absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
-                            <input type="text" id="targetUrlInput" required placeholder="Enter target page URL (e.g. yoursite.com/seo-guide/)" 
+                            <input type="text" id="targetUrlInput" required placeholder="Enter target page URL (e.g. amplechealthcare.com/pcd-pharma-...)" 
                                 class="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-300 text-slate-900 placeholder-slate-400 rounded-lg text-sm focus:outline-none focus:border-orange-500 focus:bg-white focus:ring-1 focus:ring-orange-500 transition">
                         </div>
                         <button type="submit" id="auditSubmitBtn" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold text-sm px-6 py-2.5 rounded-lg transition flex items-center justify-center gap-2 shadow-sm shrink-0">
                             <i class="fa-solid fa-magnifying-glass-chart"></i>
-                            <span>Audit Link Growth</span>
+                            <span>Audit Inbound Links</span>
                         </button>
                     </div>
                 </form>
@@ -93,8 +93,8 @@
                 
                 <div id="emptyState" class="h-full flex flex-col items-center justify-center text-center p-8 text-slate-400">
                     <img src="assets/favicon.png" onerror="this.style.display='none'" alt="Mascot" class="w-16 h-16 object-contain mb-3 opacity-40">
-                    <p class="text-sm font-semibold text-slate-600">Ready to Analyze Page Growth Architecture</p>
-                    <p class="text-xs text-slate-400 max-w-md mt-1">Audit internal link profiles, anchor text diversity, double H1 tags, search intent alignment, and uncover missing internal link opportunities from 50+ domain pages.</p>
+                    <p class="text-sm font-semibold text-slate-600">Discover Inbound Internal Linking Architecture</p>
+                    <p class="text-xs text-slate-400 max-w-md mt-1">Audit which pages on your domain are linking directly into this URL, review anchor text usage, and reveal pages that should link but aren't.</p>
                 </div>
 
                 <!-- Report Content Wrapper -->
@@ -103,66 +103,65 @@
                     <!-- Link Metrics Overview Strip -->
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
                         <div class="bg-white border border-slate-200 rounded-xl p-4 text-center shadow-xs">
-                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Internal Links</span>
-                            <div id="metricInternalLinks" class="text-xl font-extrabold text-slate-800 mt-1">0</div>
-                            <span class="text-[10px] text-slate-500">Outbound Internal</span>
+                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Inbound Links Found</span>
+                            <div id="metricInboundCount" class="text-xl font-extrabold text-orange-600 mt-1">0</div>
+                            <span class="text-[10px] text-slate-500">Giving PageRank</span>
                         </div>
                         <div class="bg-white border border-slate-200 rounded-xl p-4 text-center shadow-xs">
-                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">External Links</span>
-                            <div id="metricExternalLinks" class="text-xl font-extrabold text-slate-800 mt-1">0</div>
-                            <span class="text-[10px] text-slate-500">Outbound External</span>
+                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Indexed Domain Pages</span>
+                            <div id="metricDomainTotal" class="text-xl font-extrabold text-slate-800 mt-1">0</div>
+                            <span class="text-[10px] text-slate-500">Total Scanned</span>
                         </div>
                         <div class="bg-white border border-slate-200 rounded-xl p-4 text-center shadow-xs">
-                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Word Count</span>
-                            <div id="metricWordCount" class="text-xl font-extrabold text-slate-800 mt-1">0</div>
-                            <span id="contentDepthBadge" class="text-[10px] font-bold text-emerald-600">Adequate</span>
+                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Linking Ratio</span>
+                            <div id="metricLinkRatio" class="text-xl font-extrabold text-slate-800 mt-1">0%</div>
+                            <span class="text-[10px] text-slate-500">Coverage</span>
                         </div>
                         <div class="bg-white border border-slate-200 rounded-xl p-4 text-center shadow-xs">
-                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Link Equity Score</span>
-                            <div id="metricEquityScore" class="text-xl font-extrabold text-orange-600 mt-1">--</div>
-                            <span class="text-[10px] text-slate-500">Flow Potential</span>
+                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Topic Authority</span>
+                            <div id="metricTopicHealth" class="text-xl font-extrabold text-emerald-600 mt-1">--</div>
+                            <span class="text-[10px] text-slate-500">Internal Strength</span>
                         </div>
                     </div>
 
-                    <!-- On-Page Critical Issues (H1, Meta, Canonical) -->
+                    <!-- Inbound Linking Pages (The Pages Actually Pointing Here) -->
                     <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-xs space-y-3">
                         <div class="flex items-center justify-between border-b border-slate-100 pb-2">
                             <h3 class="text-xs font-bold uppercase text-slate-700 tracking-wide flex items-center gap-2">
-                                <i class="fa-solid fa-triangle-exclamation text-amber-500"></i> On-Page Issues & Metadata Health
+                                <i class="fa-solid fa-arrow-turn-down text-emerald-600 rotate-90"></i> Pages Giving Links To This Page
                             </h3>
-                            <span id="onPageScoreBadge" class="text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700">Checking</span>
+                            <span id="inboundBadge" class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700">0 Pages</span>
                         </div>
-                        <div id="onPageIssuesList" class="space-y-2"></div>
+                        <div id="inboundLinksList" class="space-y-2.5"></div>
                     </div>
 
                     <!-- Anchor Text Analysis & Recommendations -->
                     <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-xs space-y-3">
                         <div class="flex items-center justify-between border-b border-slate-100 pb-2">
                             <h3 class="text-xs font-bold uppercase text-slate-700 tracking-wide flex items-center gap-2">
-                                <i class="fa-solid fa-tags text-orange-500"></i> Anchor Text Profile & Optimization
+                                <i class="fa-solid fa-tags text-orange-500"></i> Anchor Text Profile & Suggestions
                             </h3>
-                            <span class="text-[11px] text-slate-400">Anchor Diversification</span>
+                            <span class="text-[11px] text-slate-400">Anchor Recommendations</span>
                         </div>
                         
-                        <!-- Anchor Recommendation Box -->
-                        <div id="anchorRecommendationBox" class="p-3 bg-amber-50/60 border border-amber-200 rounded-lg text-xs space-y-1">
+                        <!-- Recommendation Box -->
+                        <div class="p-3 bg-amber-50/70 border border-amber-200 rounded-lg text-xs space-y-1">
                             <div class="font-bold text-amber-900 flex items-center gap-1.5">
-                                <i class="fa-solid fa-lightbulb text-amber-600"></i> Recommended Anchor Text Strategy
+                                <i class="fa-solid fa-lightbulb text-amber-600"></i> Best Anchor Texts For This Page
                             </div>
                             <p id="anchorSuggestionText" class="text-amber-800 text-[11px] leading-relaxed">
-                                Analyzing page signals...
+                                Evaluating keyword slug...
                             </p>
                         </div>
 
-                        <!-- Anchor Distribution Table -->
+                        <!-- Detected Anchors Table -->
                         <div class="overflow-x-auto">
                             <table class="w-full text-left text-xs border border-slate-200 rounded-lg overflow-hidden">
                                 <thead class="bg-slate-100 text-slate-600 font-semibold border-b border-slate-200">
                                     <tr>
-                                        <th class="p-2.5">Anchor Text</th>
-                                        <th class="p-2.5">Target Destination</th>
-                                        <th class="p-2.5 text-center">Count</th>
-                                        <th class="p-2.5 text-center">Type</th>
+                                        <th class="p-2.5">Anchor / Mention Keyword</th>
+                                        <th class="p-2.5">Source Page</th>
+                                        <th class="p-2.5 text-center">Relevance</th>
                                     </tr>
                                 </thead>
                                 <tbody id="anchorTableBody" class="divide-y divide-slate-100"></tbody>
@@ -170,15 +169,15 @@
                         </div>
                     </div>
 
-                    <!-- Internal Linking Opportunities ("Should Link But Doesn't") -->
+                    <!-- Link Opportunity Radar: Pages That SHOULD Link But Don't -->
                     <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-xs space-y-3">
                         <div class="flex items-center justify-between border-b border-slate-100 pb-2">
                             <h3 class="text-xs font-bold uppercase text-slate-700 tracking-wide flex items-center gap-2">
-                                <i class="fa-solid fa-crosshairs text-emerald-600"></i> Missing Link Opportunities (Targeted Pages)
+                                <i class="fa-solid fa-crosshairs text-orange-500"></i> Missing Link Opportunities (High Priority)
                             </h3>
-                            <span class="text-[11px] text-slate-400">Top Contextual Candidates</span>
+                            <span class="text-[11px] text-slate-400">Add Links From These</span>
                         </div>
-                        <p class="text-[11px] text-slate-500">These indexed pages from your domain share topic overlap with your target page, but do not yet link to it. Adding contextual links from these pages passes relevant PageRank:</p>
+                        <p class="text-[11px] text-slate-500">These pages on your domain rank for similar pharma/business topics but have not yet linked to this target page. Add internal links from these posts to boost ranking:</p>
                         <div id="missingLinkOpportunitiesList" class="space-y-2.5"></div>
                     </div>
 
@@ -198,7 +197,7 @@
             </div>
         </section>
 
-        <!-- Right Panel: Full Indexed Site Inventory (50+ Pages) -->
+        <!-- Right Panel: Full Indexed Site Inventory (All Domain Pages) -->
         <section class="hidden lg:flex lg:w-2/5 flex-col relative h-full bg-slate-100 border-l border-slate-200">
             <div class="bg-white px-4 py-3 border-b border-slate-200 flex items-center justify-between text-xs shrink-0 shadow-sm">
                 <div class="flex items-center gap-2 font-semibold text-slate-700">
@@ -210,7 +209,7 @@
                 </span>
             </div>
 
-            <!-- Search Filter Bar for Domain Pages -->
+            <!-- Search Filter Bar -->
             <div class="p-3 bg-slate-50 border-b border-slate-200">
                 <input type="text" id="pageFilterInput" oninput="filterIndexedPages()" placeholder="Filter pages by keyword or slug..." 
                     class="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-md text-xs placeholder-slate-400 focus:outline-none focus:border-orange-500">
@@ -221,7 +220,7 @@
                 <div id="serpEmptyState" class="h-full flex flex-col items-center justify-center text-center p-8 text-slate-400">
                     <i class="fa-solid fa-network-wired text-3xl mb-2 opacity-30 text-slate-400"></i>
                     <p class="text-xs font-semibold text-slate-600">No Domain Loaded Yet</p>
-                    <p class="text-[11px] text-slate-400 max-w-xs mt-0.5">Submit any page URL to scrape all indexed URLs from that entire domain (up to 100 pages at once).</p>
+                    <p class="text-[11px] text-slate-400 max-w-xs mt-0.5">Submit any URL above to pull every single indexed page across that domain.</p>
                 </div>
                 <div id="indexedPagesList" class="space-y-2.5 hidden"></div>
             </div>
@@ -230,7 +229,7 @@
     </main>
 
     <!-- Floating MapScrap Mascot Navigation Button -->
-    <a href="https://rohit-mehmi.github.io/MapScrap/" 
+    <a href="https://rohitmehmi1.github.io/mapscrap/" 
        target="_blank" 
        rel="noopener noreferrer" 
        title="Open MapScrap Lead Generator"
@@ -249,7 +248,9 @@
         const SERPER_KEY = "99c8d57573b8b9c14bc6198a61aaef4fd01d076d";
 
         let allIndexedPages = [];
-        let currentAuditReport = null;
+        let inboundLinkingPages = [];
+        let missingLinkOpportunities = [];
+        let detectedAnchors = [];
 
         document.addEventListener("DOMContentLoaded", () => {
             resolveVisitorIP();
@@ -268,6 +269,16 @@
             }
         }
 
+        function extractCleanSlug(url) {
+            try {
+                const parsed = new URL(url);
+                const pathParts = parsed.pathname.split('/').filter(p => p.length > 0);
+                return pathParts[pathParts.length - 1] || parsed.hostname;
+            } catch (e) {
+                return url.replace(/[^a-zA-Z0-9]/g, ' ').trim();
+            }
+        }
+
         async function handleSeoAudit(event) {
             event.preventDefault();
 
@@ -280,66 +291,43 @@
             const statusInd = document.getElementById('statusIndicator');
 
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Auditing Architecture...`;
-            statusInd.innerText = "Analyzing page DOM & links...";
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Auditing Links...`;
+            statusInd.innerText = "Querying Google SERP index...";
             document.getElementById('auditedUrlLabel').innerText = targetUrl;
 
             try {
-                let targetHostname = new URL(targetUrl).hostname;
+                const targetObj = new URL(targetUrl);
+                const hostname = targetObj.hostname.replace(/^www\./, '');
+                const cleanSlug = extractCleanSlug(targetUrl);
+                const keywordTopic = cleanSlug.replace(/[-_]/g, ' ').replace(/\.[a-z0-9]+$/i, '');
 
-                // 1. Concurrently fetch the live HTML of target page via CORS proxy
-                const htmlPromise = fetchPageHtml(targetUrl);
+                // 1. Fetch entire domain catalog (up to 100 indexed pages)
+                const domainPromise = fetchDomainPages(hostname);
 
-                // 2. Concurrently fetch all indexed pages of the domain via Serper (up to 100 pages)
-                const serpPromise = fetchAllIndexedDomainPages(targetHostname);
+                // 2. Fetch pages linking to or referencing this exact slug/URL on the domain
+                const inboundPromise = fetchInboundLinks(hostname, cleanSlug, targetUrl);
 
-                const [htmlContent, domainPages] = await Promise.all([htmlPromise, serpPromise]);
+                const [domainPages, inboundPages] = await Promise.all([domainPromise, inboundPromise]);
 
                 allIndexedPages = domainPages;
-                renderIndexedPagesList(domainPages);
+                inboundLinkingPages = inboundPages;
 
-                // 3. Parse HTML and run complete internal linking & on-page audit
-                parseAndAuditSeo(htmlContent, targetUrl, targetHostname, domainPages);
+                renderIndexedPagesList(domainPages);
+                processArchitecture(targetUrl, keywordTopic, domainPages, inboundPages);
 
             } catch (err) {
                 console.error(err);
-                alert("Audit encountered an issue: " + (err.message || "Failed to parse page."));
+                alert("Audit failed: " + err.message);
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<i class="fa-solid fa-magnifying-glass-chart"></i> Audit Link Growth`;
+                submitBtn.innerHTML = `<i class="fa-solid fa-magnifying-glass-chart"></i> Audit Inbound Links`;
                 statusInd.innerText = "Ready";
             }
         }
 
-        async function fetchPageHtml(url) {
-            // Use high-availability CORS proxies to read the raw HTML directly from browser
-            const proxies = [
-                `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-                `https://corsproxy.io/?${encodeURIComponent(url)}`
-            ];
-
-            for (const proxyUrl of proxies) {
-                try {
-                    const res = await Promise.race([
-                        fetch(proxyUrl),
-                        new Promise((_, r) => setTimeout(() => r(new Error('timeout')), 6000))
-                    ]);
-                    if (res.ok) {
-                        return await res.text();
-                    }
-                } catch (e) {
-                    continue;
-                }
-            }
-
-            // Fallback: Mock DOM structure based on SERP snippet if proxies are restricted
-            return `<html><head><title>Analysis for ${url}</title></head><body><h1>Audited Target Page</h1><p>Content scanned via SERP profile.</p></body></html>`;
-        }
-
-        async function fetchAllIndexedDomainPages(hostname) {
-            document.getElementById('domainTreeTitle').innerText = `Indexing: ${hostname}`;
+        async function fetchDomainPages(hostname) {
+            document.getElementById('domainTreeTitle').innerText = `Domain: ${hostname}`;
             try {
-                // Request 100 results directly to get 50+ pages in a single call
                 const response = await fetch("https://google.serper.dev/search", {
                     method: "POST",
                     headers: {
@@ -357,316 +345,198 @@
                 document.getElementById('indexedCountBadge').innerText = `${pages.length} Pages Indexed`;
                 return pages;
             } catch (err) {
-                console.warn("SERP scrape error", err);
+                console.warn("Domain fetch error", err);
                 return [];
             }
         }
 
-        function parseAndAuditSeo(html, targetUrl, hostname, domainPages) {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, "text/html");
-
-            // --- 1. On-Page Extraction ---
-            const titles = Array.from(doc.querySelectorAll('title')).map(t => t.innerText.trim());
-            const metaDescs = Array.from(doc.querySelectorAll('meta[name="description"]')).map(m => m.getAttribute('content') || '');
-            const h1s = Array.from(doc.querySelectorAll('h1')).map(h => h.innerText.trim());
-            const h2s = Array.from(doc.querySelectorAll('h2')).map(h => h.innerText.trim());
-            const h3s = Array.from(doc.querySelectorAll('h3')).map(h => h.innerText.trim());
-            const canonical = doc.querySelector('link[rel="canonical"]')?.getAttribute('href') || 'None';
-            const robotsMeta = doc.querySelector('meta[name="robots"]')?.getAttribute('content') || 'Index, Follow';
-
-            // Clean text word count
-            const bodyText = doc.body ? doc.body.innerText.replace(/\s+/g, ' ').trim() : '';
-            const wordCount = bodyText.split(' ').filter(w => w.length > 0).length;
-
-            // --- 2. Link & Anchor Text Extraction ---
-            const rawLinks = Array.from(doc.querySelectorAll('a[href]'));
-            const internalLinks = [];
-            const externalLinks = [];
-            const anchorCounts = {};
-
-            rawLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                let resolvedUrl = '';
-                try {
-                    resolvedUrl = new URL(href, targetUrl).href;
-                } catch (e) {
-                    return;
-                }
-
-                const anchorText = link.innerText.trim() || link.querySelector('img')?.getAttribute('alt') || '[Image Link / No Text]';
-                const isInternal = resolvedUrl.includes(hostname);
-
-                const linkObj = {
-                    url: resolvedUrl,
-                    anchor: anchorText,
-                    rel: link.getAttribute('rel') || 'dofollow'
-                };
-
-                if (isInternal) {
-                    internalLinks.push(linkObj);
-                    const cleanAnchor = anchorText.toLowerCase();
-                    anchorCounts[cleanAnchor] = (anchorCounts[cleanAnchor] || 0) + 1;
-                } else {
-                    externalLinks.push(linkObj);
-                }
-            });
-
-            // --- 3. Evaluate On-Page Issues ---
-            const issues = [];
-
-            // H1 Tag Check
-            if (h1s.length === 0) {
-                issues.push({
-                    type: 'error',
-                    title: 'Missing H1 Tag',
-                    desc: 'This page has zero H1 tags. Search engines need a clear top-level heading to understand the main topic.'
+        async function fetchInboundLinks(hostname, slug, fullUrl) {
+            try {
+                // Search Google for pages on that domain that contain this specific page slug or path
+                const response = await fetch("https://google.serper.dev/search", {
+                    method: "POST",
+                    headers: {
+                        "X-API-KEY": SERPER_KEY,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        q: `site:${hostname} intext:"${slug}" OR intext:"${fullUrl}"`,
+                        num: 30
+                    })
                 });
-            } else if (h1s.length > 1) {
-                issues.push({
-                    type: 'warning',
-                    title: `Multiple H1 Tags Detected (${h1s.length} found)`,
-                    desc: `Found ${h1s.length} H1 headings: "${h1s.slice(0, 2).join('", "')}". Keep only one primary H1 tag for unambiguous topical focus.`
+
+                const data = await response.json();
+                const rawOrganic = data.organic || [];
+
+                // Filter out the target page itself
+                return rawOrganic.filter(item => {
+                    const cleanItemLink = item.link.replace(/\/$/, '').toLowerCase();
+                    const cleanTarget = fullUrl.replace(/\/$/, '').toLowerCase();
+                    return cleanItemLink !== cleanTarget;
                 });
-            } else {
-                issues.push({
-                    type: 'success',
-                    title: 'Single Optimized H1 Tag',
-                    desc: `H1: "${h1s[0]}"`
-                });
+            } catch (err) {
+                console.warn("Inbound fetch error", err);
+                return [];
             }
+        }
 
-            // Meta Title Check
-            const mainTitle = titles[0] || 'No Title Found';
-            if (mainTitle.length < 30) {
-                issues.push({
-                    type: 'warning',
-                    title: `Short Meta Title (${mainTitle.length} chars)`,
-                    desc: `"${mainTitle}" is below the recommended 50–60 character sweet spot. Expand it with high-intent keywords.`
-                });
-            } else if (mainTitle.length > 65) {
-                issues.push({
-                    type: 'warning',
-                    title: `Overly Long Meta Title (${mainTitle.length} chars)`,
-                    desc: `"${mainTitle}" exceeds 60 characters and will likely be truncated on Google desktop & mobile SERPs.`
-                });
-            } else {
-                issues.push({
-                    type: 'success',
-                    title: `Ideal Meta Title Length (${mainTitle.length} chars)`,
-                    desc: `"${mainTitle}"`
-                });
-            }
+        function processArchitecture(targetUrl, keywordTopic, domainPages, inboundPages) {
+            // Determine Missing Links (Pages in domain with topic relevance that are NOT in inbound list)
+            const topicWords = keywordTopic.toLowerCase().split(' ').filter(w => w.length > 3);
+            const inboundUrls = new Set(inboundPages.map(p => p.link.toLowerCase()));
+            const targetClean = targetUrl.toLowerCase();
 
-            // Meta Description Check
-            const mainDesc = metaDescs[0] || '';
-            if (!mainDesc) {
-                issues.push({
-                    type: 'error',
-                    title: 'Missing Meta Description',
-                    desc: 'No meta description found. Google will generate an arbitrary snippet, reducing click-through rates.'
-                });
-            } else if (mainDesc.length < 100 || mainDesc.length > 160) {
-                issues.push({
-                    type: 'warning',
-                    title: `Meta Description Length (${mainDesc.length} chars)`,
-                    desc: `Length should sit between 130–160 characters. Current snippet: "${mainDesc.substring(0, 80)}..."`
-                });
-            } else {
-                issues.push({
-                    type: 'success',
-                    title: 'Optimized Meta Description',
-                    desc: `"${mainDesc}"`
-                });
-            }
+            missingLinkOpportunities = [];
+            detectedAnchors = [];
 
-            // Word Count / Intent Check
-            if (wordCount < 400) {
-                issues.push({
-                    type: 'warning',
-                    title: `Thin Content Risk (${wordCount} words)`,
-                    desc: 'Word count is low for ranking competitive search queries. Expand depth and add comprehensive subheadings.'
-                });
-            }
-
-            // Canonical Check
-            if (canonical === 'None') {
-                issues.push({
-                    type: 'warning',
-                    title: 'Missing Canonical Tag',
-                    desc: 'No self-referencing canonical URL specified. This can trigger duplicate content issues if URL parameters exist.'
-                });
-            }
-
-            // --- 4. Anchor Text Strategy Recommendations ---
-            const primaryKw = h1s[0] || mainTitle.split(/[-|]/)[0].trim() || 'Core Topic';
-            const genericAnchors = ['click here', 'read more', 'learn more', 'here', 'link', 'website', '[image link / no text]'];
-            const foundGenerics = Object.keys(anchorCounts).filter(a => genericAnchors.includes(a));
-
-            let anchorStrategyText = `Your primary topic focus appears to be <b>"${primaryKw}"</b>. `;
-            if (foundGenerics.length > 0) {
-                anchorStrategyText += `<span class="text-rose-700 font-bold">Warning:</span> You are using generic non-descriptive anchors like <i>"${foundGenerics.join('", "')}"</i>. Replace these with keyword-rich variations such as <b>"${primaryKw} review"</b>, <b>"${primaryKw} guide"</b>, or exact feature phrases.`;
-            } else {
-                anchorStrategyText += `Anchor texts avoid spammy repetition. Recommended next anchor variations to send to this page: <b>"${primaryKw} best practices"</b>, <b>"${primaryKw} tools"</b>, and natural long-tail phrases.`;
-            }
-
-            // --- 5. Find "Missing Link" Opportunities from Scraped Domain Pages ---
-            const missingLinkOpportunities = [];
             domainPages.forEach(p => {
-                if (p.link === targetUrl) return;
+                const pLinkClean = p.link.toLowerCase();
+                if (pLinkClean === targetClean || inboundUrls.has(pLinkClean)) return;
 
-                // Check if page snippet or title matches target topic words
-                const titleLower = (p.title || '').toLowerCase();
-                const snippetLower = (p.snippet || '').toLowerCase();
-                const kwWords = primaryKw.toLowerCase().split(' ').filter(w => w.length > 3);
+                const textToCheck = `${p.title || ''} ${p.snippet || ''}`.toLowerCase();
+                const matchedWords = topicWords.filter(w => textToCheck.includes(w));
 
-                const hasRelevance = kwWords.some(w => titleLower.includes(w) || snippetLower.includes(w));
-                
-                // If relevant and not already linked
-                const alreadyLinksOut = internalLinks.some(l => l.url === p.link);
-
-                if (hasRelevance && !alreadyLinksOut) {
+                if (matchedWords.length > 0) {
                     missingLinkOpportunities.push({
                         title: p.title,
                         link: p.link,
                         snippet: p.snippet,
-                        reason: `Mentions terms related to "${kwWords.join(', ')}"`
+                        matchedWords: matchedWords.join(', ')
                     });
                 }
             });
 
-            // Populate Report Globals & UI
-            currentAuditReport = {
-                targetUrl,
-                wordCount,
-                internalLinksCount: internalLinks.length,
-                externalLinksCount: externalLinks.length,
-                h1: h1s.join(' | '),
-                title: mainTitle,
-                issues,
-                anchors: anchorCounts,
-                missingOpportunities: missingLinkOpportunities
-            };
+            // Extract anchor/mention candidates from inbound snippets
+            inboundPages.forEach(p => {
+                const snippet = p.snippet || '';
+                let detectedPhrase = keywordTopic;
+                const match = snippet.match(/([a-zA-Z0-9\s]{4,30})/);
+                if (match) detectedPhrase = match[0].trim();
 
-            renderAuditUi(internalLinks, externalLinks, wordCount, issues, anchorCounts, anchorStrategyText, missingLinkOpportunities);
-        }
-
-        function renderAuditUi(internalLinks, externalLinks, wordCount, issues, anchorCounts, anchorStrategyText, missingOpportunities) {
-            document.getElementById('metricInternalLinks').innerText = internalLinks.length;
-            document.getElementById('metricExternalLinks').innerText = externalLinks.length;
-            document.getElementById('metricWordCount').innerText = wordCount;
-
-            const depthBadge = document.getElementById('contentDepthBadge');
-            if (wordCount > 1000) {
-                depthBadge.className = "text-[10px] font-bold text-emerald-600";
-                depthBadge.innerText = "In-Depth Post";
-            } else if (wordCount > 400) {
-                depthBadge.className = "text-[10px] font-bold text-blue-600";
-                depthBadge.innerText = "Standard Post";
-            } else {
-                depthBadge.className = "text-[10px] font-bold text-rose-600";
-                depthBadge.innerText = "Thin Content";
-            }
-
-            // Equity Score (Ratio of internal links to outgoing links)
-            const equityScore = Math.min(100, Math.round((internalLinks.length * 1.5) + (wordCount / 50)));
-            document.getElementById('metricEquityScore').innerText = `${equityScore}/100`;
-
-            // On-Page Issues List
-            const issuesContainer = document.getElementById('onPageIssuesList');
-            issuesContainer.innerHTML = '';
-
-            let hasErrors = false;
-            issues.forEach(iss => {
-                const el = document.createElement('div');
-                let colorClass = "bg-emerald-50 border-emerald-200 text-emerald-800";
-                let icon = "fa-circle-check text-emerald-500";
-
-                if (iss.type === 'error') {
-                    colorClass = "bg-rose-50 border-rose-200 text-rose-800";
-                    icon = "fa-circle-xmark text-rose-500";
-                    hasErrors = true;
-                } else if (iss.type === 'warning') {
-                    colorClass = "bg-amber-50 border-amber-200 text-amber-800";
-                    icon = "fa-triangle-exclamation text-amber-500";
-                }
-
-                el.className = `p-3 rounded-lg border text-xs ${colorClass}`;
-                el.innerHTML = `
-                    <div class="font-bold flex items-center gap-1.5">
-                        <i class="fa-solid ${icon}"></i> ${iss.title}
-                    </div>
-                    <p class="text-[11px] mt-0.5 opacity-90">${iss.desc}</p>
-                `;
-                issuesContainer.appendChild(el);
+                detectedAnchors.push({
+                    anchor: detectedPhrase,
+                    sourceTitle: p.title,
+                    sourceLink: p.link
+                });
             });
 
-            const scoreBadge = document.getElementById('onPageScoreBadge');
-            if (hasErrors) {
-                scoreBadge.className = "text-xs font-bold px-2 py-0.5 rounded bg-rose-100 text-rose-700";
-                scoreBadge.innerText = "Action Required";
+            renderReportUI(targetUrl, keywordTopic, domainPages.length, inboundPages, missingLinkOpportunities);
+        }
+
+        function renderReportUI(targetUrl, keywordTopic, domainTotal, inboundPages, missingOpps) {
+            document.getElementById('metricInboundCount').innerText = inboundPages.length;
+            document.getElementById('metricDomainTotal').innerText = domainTotal;
+
+            const ratio = domainTotal > 0 ? Math.round((inboundPages.length / domainTotal) * 100) : 0;
+            document.getElementById('metricLinkRatio').innerText = `${ratio}%`;
+
+            const topicHealth = document.getElementById('metricTopicHealth');
+            if (inboundPages.length >= 5) {
+                topicHealth.innerText = "Strong Hub";
+                topicHealth.className = "text-xl font-extrabold text-emerald-600 mt-1";
+            } else if (inboundPages.length >= 1) {
+                topicHealth.innerText = "Moderate";
+                topicHealth.className = "text-xl font-extrabold text-amber-600 mt-1";
             } else {
-                scoreBadge.className = "text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-700";
-                scoreBadge.innerText = "Architecture Solid";
+                topicHealth.innerText = "Orphan Risk";
+                topicHealth.className = "text-xl font-extrabold text-rose-600 mt-1";
             }
 
-            // Anchor Strategy
-            document.getElementById('anchorSuggestionText').innerHTML = anchorStrategyText;
+            // Inbound Links List
+            const inboundList = document.getElementById('inboundLinksList');
+            const inboundBadge = document.getElementById('inboundBadge');
+            inboundBadge.innerText = `${inboundPages.length} Pages Linking`;
+            inboundList.innerHTML = '';
 
-            // Anchor Distribution Table
-            const tbody = document.getElementById('anchorTableBody');
-            tbody.innerHTML = '';
-
-            const sortedAnchors = Object.entries(anchorCounts).sort((a, b) => b[1] - a[1]);
-            if (sortedAnchors.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" class="p-3 text-center text-slate-400">No outbound internal links found on this page.</td></tr>`;
+            if (inboundPages.length === 0) {
+                inboundList.innerHTML = `
+                    <div class="p-4 bg-rose-50 border border-rose-200 rounded-lg text-xs text-rose-800">
+                        <div class="font-bold flex items-center gap-1.5 mb-1">
+                            <i class="fa-solid fa-triangle-exclamation text-rose-500"></i> No Clear Inbound Internal Links Found!
+                        </div>
+                        This page is at risk of being an <b>Orphan Page</b>. Google has not indexed internal links pointing into this URL. Add internal links from your top pages immediately.
+                    </div>
+                `;
             } else {
-                sortedAnchors.forEach(([anchor, count]) => {
-                    const matchedLink = internalLinks.find(l => l.anchor.toLowerCase() === anchor);
-                    const destUrl = matchedLink ? matchedLink.url : 'Internal';
-                    const isGeneric = ['click here', 'read more', 'learn more', 'here', 'link', 'website'].includes(anchor);
+                inboundPages.forEach((item, idx) => {
+                    const row = document.createElement('div');
+                    row.className = "p-3 bg-white border border-slate-200 rounded-lg text-xs hover:border-emerald-400 transition shadow-xs";
+                    row.innerHTML = `
+                        <div class="flex items-start justify-between gap-2">
+                            <div>
+                                <a href="${item.link}" target="_blank" class="font-bold text-slate-900 hover:text-emerald-700 transition">
+                                    #${idx + 1}. ${item.title} &rarr;
+                                </a>
+                                <p class="text-[11px] text-slate-400 font-mono mt-0.5 truncate max-w-sm">${item.link}</p>
+                            </div>
+                            <span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded text-[10px] font-bold shrink-0">
+                                Active Inbound Link
+                            </span>
+                        </div>
+                        <p class="text-[11px] text-slate-600 mt-1.5 italic">${item.snippet || 'Referenced on page'}</p>
+                    `;
+                    inboundList.appendChild(row);
+                });
+            }
 
+            // Anchor Strategy Recommendations
+            const words = keywordTopic.split(' ');
+            const primaryKw = words.slice(0, 3).join(' ');
+            document.getElementById('anchorSuggestionText').innerHTML = `
+                The core subject of this URL is <b>"${keywordTopic}"</b>.<br>
+                <b>Recommended Exact-Match Anchor:</b> <code>"${keywordTopic}"</code><br>
+                <b>Recommended Partial-Match Variations:</b> <code>"${primaryKw} guidelines"</code>, <code>"${primaryKw} franchise process"</code>, <code>"check ${primaryKw}"</code>.<br>
+                <i>Tip: Avoid using generic text like "Click Here" or "Read More" when linking to this post.</i>
+            `;
+
+            // Anchors Table
+            const anchorTable = document.getElementById('anchorTableBody');
+            anchorTable.innerHTML = '';
+            if (inboundPages.length === 0) {
+                anchorTable.innerHTML = `<tr><td colspan="3" class="p-3 text-center text-slate-400">No inbound internal links to analyze.</td></tr>`;
+            } else {
+                inboundPages.forEach(p => {
                     const tr = document.createElement('tr');
                     tr.className = "hover:bg-slate-50 transition";
                     tr.innerHTML = `
-                        <td class="p-2.5 font-bold text-slate-800">${anchor}</td>
-                        <td class="p-2.5 text-slate-500 truncate max-w-[200px]" title="${destUrl}">${destUrl}</td>
-                        <td class="p-2.5 text-center font-bold text-slate-700">${count}</td>
+                        <td class="p-2.5 font-bold text-slate-800">${keywordTopic}</td>
+                        <td class="p-2.5 text-slate-500 truncate max-w-[200px]" title="${p.link}">${p.title}</td>
                         <td class="p-2.5 text-center">
-                            <span class="text-[10px] font-bold px-1.5 py-0.5 rounded ${isGeneric ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700'}">
-                                ${isGeneric ? 'Generic / Fix' : 'Descriptive'}
-                            </span>
+                            <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700">Topical Match</span>
                         </td>
                     `;
-                    tbody.appendChild(tr);
+                    anchorTable.appendChild(tr);
                 });
             }
 
             // Missing Opportunities List
-            const oppContainer = document.getElementById('missingLinkOpportunitiesList');
-            oppContainer.innerHTML = '';
+            const oppList = document.getElementById('missingLinkOpportunitiesList');
+            oppList.innerHTML = '';
 
-            if (missingOpportunities.length === 0) {
-                oppContainer.innerHTML = `<div class="p-3 bg-slate-50 rounded-lg text-xs text-slate-500">No immediate missing links flagged. Ensure internal topics are broadly connected.</div>`;
+            if (missingOpps.length === 0) {
+                oppList.innerHTML = `<div class="p-3 bg-slate-50 rounded-lg text-xs text-slate-500">No immediate missing links detected. Internal coverage is balanced.</div>`;
             } else {
-                missingOpportunities.slice(0, 6).forEach(opp => {
+                missingOpps.slice(0, 8).forEach(opp => {
                     const item = document.createElement('div');
-                    item.className = "p-3 bg-white border border-slate-200 rounded-lg text-xs hover:border-emerald-400 transition shadow-xs";
+                    item.className = "p-3 bg-white border border-slate-200 rounded-lg text-xs hover:border-orange-400 transition shadow-xs";
                     item.innerHTML = `
                         <div class="flex items-start justify-between gap-2">
                             <div>
-                                <a href="${opp.link}" target="_blank" class="font-bold text-slate-900 hover:text-emerald-700 transition">
+                                <a href="${opp.link}" target="_blank" class="font-bold text-slate-900 hover:text-orange-600 transition">
                                     ${opp.title} &rarr;
                                 </a>
                                 <p class="text-[11px] text-slate-400 font-mono mt-0.5 truncate max-w-sm">${opp.link}</p>
                             </div>
-                            <span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded text-[10px] font-bold shrink-0">
-                                Link Opportunity
+                            <span class="px-2 py-0.5 bg-orange-50 text-orange-700 border border-orange-200 rounded text-[10px] font-bold shrink-0">
+                                Recommended Source
                             </span>
                         </div>
-                        <p class="text-[11px] text-slate-600 mt-1.5 italic">${opp.snippet || opp.reason}</p>
+                        <p class="text-[11px] text-slate-600 mt-1.5 italic">${opp.snippet || 'High topical synergy'}</p>
+                        <div class="mt-2 text-[10px] text-slate-400">
+                            Suggested Action: Add link inside this page targeting <b>"${keywordTopic}"</b>
+                        </div>
                     `;
-                    oppContainer.appendChild(item);
+                    oppList.appendChild(item);
                 });
             }
 
@@ -704,7 +574,7 @@
                     <p class="text-[11px] text-slate-500 mt-1 line-clamp-2">${p.snippet || ''}</p>
                     <div class="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between">
                         <button onclick="setAuditUrl('${p.link}')" class="text-[11px] font-bold text-orange-600 hover:text-orange-700 flex items-center gap-1">
-                            <i class="fa-solid fa-arrows-rotate"></i> Audit This Page
+                            <i class="fa-solid fa-arrows-rotate"></i> Audit Inbound Links For This
                         </button>
                         <a href="${p.link}" target="_blank" class="text-[11px] text-slate-400 hover:text-slate-600">
                             Visit <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
@@ -735,35 +605,24 @@
         }
 
         function exportSeoReport() {
-            if (!currentAuditReport) return;
-            const rep = currentAuditReport;
-
+            const target = document.getElementById('targetUrlInput').value;
             const rows = [
-                ["Target URL", rep.targetUrl],
-                ["Primary H1", rep.h1],
-                ["Word Count", rep.wordCount],
-                ["Internal Links Count", rep.internalLinksCount],
-                ["External Links Count", rep.externalLinksCount],
+                ["Target URL", target],
+                ["Inbound Internal Links Count", inboundLinkingPages.length],
+                ["Domain Pages Scanned", allIndexedPages.length],
                 [],
-                ["ANCHOR TEXT PROFILE", "OCCURRENCE COUNT"]
+                ["PAGES GIVING INTERNAL LINKS", "URL"],
+                ...inboundLinkingPages.map(p => [`"${p.title.replace(/"/g, '""')}"`, `"${p.link}"`]),
+                [],
+                ["RECOMMENDED PAGES TO ADD LINKS FROM", "URL", "SNIPPET"],
+                ...missingLinkOpportunities.map(p => [`"${p.title.replace(/"/g, '""')}"`, `"${p.link}"`, `"${(p.snippet || '').replace(/"/g, '""')}"`])
             ];
-
-            Object.entries(rep.anchors).forEach(([anchor, count]) => {
-                rows.push([`"${anchor.replace(/"/g, '""')}"`, count]);
-            });
-
-            rows.push([]);
-            rows.push(["MISSING LINK OPPORTUNITIES (URL)", "SNIPPET / CONTEXT"]);
-
-            rep.missingOpportunities.forEach(opp => {
-                rows.push([`"${opp.link}"`, `"${(opp.snippet || '').replace(/"/g, '""')}"`]);
-            });
 
             const csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(',')).join('\n');
             const encodedUri = encodeURI(csvContent);
             const link = document.createElement("a");
             link.setAttribute("href", encodedUri);
-            link.setAttribute("download", `PageScrapper_Architecture_${Date.now()}.csv`);
+            link.setAttribute("download", `PageScrapper_InboundLinks_${Date.now()}.csv`);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
